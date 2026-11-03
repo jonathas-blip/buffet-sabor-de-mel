@@ -100,3 +100,14 @@
 @media(prefers-reduced-motion:reduce){.promo-toast{animation:none}}
 
 .gallery-toggle[hidden]{display:none!important}
+
+/* Cartão promocional mais discreto em telas intermediárias. */
+@media (min-width: 701px) and (max-width: 800px) {
+  .promo-toast{right:16px;bottom:16px;width:min(350px,calc(100vw - 32px))}
+  .promo-toast-card{padding:22px 22px 18px;border-radius:22px}
+  .promo-toast-discount strong{font-size:40px}
+  .promo-toast-card h2{font-size:24px}
+  .promo-toast-description{margin-bottom:10px;font-size:11px;line-height:1.45}
+  .promo-toast-cta{min-height:42px;padding-inline:14px}
+  .promo-toast-note{margin-top:6px;font-size:8px}
+}
