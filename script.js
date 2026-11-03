@@ -71,6 +71,12 @@ if (promoModal) {
     event.preventDefault();
     closePromo();
   }, true);
+  promoModal.addEventListener('pointerup', event => {
+    const target = event.target;
+    if (!(target instanceof Element) || !target.closest('[data-promo-close]')) return;
+    event.preventDefault();
+    closePromo();
+  }, true);
   promoModal.querySelector('.promo-cta').addEventListener('click', closePromo);
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape' && !promoModal.hidden) closePromo();

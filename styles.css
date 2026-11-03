@@ -62,3 +62,20 @@
 /* Keep the promo close button above artwork and easy to tap on phones. */
 #promo-modal .promo-close{z-index:10;pointer-events:auto;touch-action:manipulation;-webkit-tap-highlight-color:transparent;width:44px;height:44px}
 @media(max-width:620px){#promo-modal .promo-close{width:44px;height:44px}}
+
+/* On phones, keep the offer compact and let the page remain usable around it. */
+@media(max-width:700px){
+  .promo-modal{inset:auto 12px 12px;display:block;padding:0;pointer-events:none;background:transparent}
+  .promo-backdrop{display:none}
+  .promo-card{width:min(100%,420px);max-height:min(48dvh,320px);margin:0 auto;overflow:auto;pointer-events:auto;border-radius:18px}
+  .promo-art{display:none}
+  .promo-content{padding:54px 18px 16px}
+  .promo-close{top:8px;right:8px;width:auto!important;height:40px!important;padding:0 16px;border-radius:999px;font-size:12px;font-weight:800}
+  .promo-content .eyebrow{margin:0 0 5px;font-size:9px}
+  .promo-discount{font-size:54px}
+  .promo-percent{font-size:25px}
+  .promo-content h2{margin:7px auto;font-size:25px}
+  .promo-content>p:not(.eyebrow):not(.promo-discount){margin-bottom:10px;font-size:12px}
+  .promo-cta{min-height:44px}
+  .promo-content>small{display:none}
+}
