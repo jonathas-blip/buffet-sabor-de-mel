@@ -7,8 +7,8 @@
   <meta name="description" content="Buffet Sabor de Mel atende festas infantis e eventos corporativos com coffee break, confraternizações, convenções e buffet no local.">
   <title>Buffet Sabor de Mel | Festas e eventos corporativos</title>
   <link rel="icon" href="assets/abelhinha-sabor-de-mel-gerada.png" type="image/png">
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css?v=20261103-style-restore3">
-  <script src="script.js?v=20261103-no-promo" defer></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css?v=20261103-promo">
+  <script src="script.js?v=20261103-promo" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -191,6 +191,17 @@
       <small>© <span id="current-year"></span> Buffet Sabor de Mel. Todos os direitos reservados.</small>
     </div>
   </footer>
+  <aside class="promo-toast" id="promo-toast" aria-label="Oferta para eventos corporativos" hidden>
+    <section class="promo-toast-card" aria-labelledby="promo-title" aria-describedby="promo-description">
+      <button class="promo-toast-close" type="button" aria-label="Fechar oferta" data-promo-close onclick="document.getElementById('promo-toast').hidden=true">Fechar</button>
+      <p class="promo-toast-eyebrow">Benefício para empresas</p>
+      <p class="promo-toast-discount"><strong>10%</strong><span>de desconto</span></p>
+      <h2 id="promo-title">Celebre com a sua equipe.</h2>
+      <p class="promo-toast-description" id="promo-description">Feche sua confraternização com antecedência e aproveite 10% de desconto.</p>
+      <a class="button button-yellow promo-toast-cta" href="https://wa.me/5511965373634?text=Ol%C3%A1%2C%20quero%20saber%20sobre%20os%2010%25%20de%20desconto%20para%20confraterniza%C3%A7%C3%A3o%20corporativa" target="_blank" rel="noopener noreferrer">Consultar no WhatsApp <span aria-hidden="true">↗</span></a>
+      <small class="promo-toast-note">Consulte condições e disponibilidade para a sua data.</small>
+    </section>
+  </aside>
 </body>
 </html>
 

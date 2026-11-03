@@ -50,3 +50,17 @@ if (galleryToggle && gallery) {
 const year = document.querySelector('#current-year');
 if (year) year.textContent = new Date().getFullYear();
 
+const promoToast = document.querySelector('#promo-toast');
+if (promoToast) {
+  const closePromo = () => { promoToast.hidden = true; };
+  promoToast.querySelector('[data-promo-close]').addEventListener('click', closePromo);
+  promoToast.querySelector('.promo-toast-cta').addEventListener('click', closePromo);
+  promoToast.addEventListener('pointerup', event => {
+    if (event.target.closest('[data-promo-close]')) closePromo();
+  }, true);
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && !promoToast.hidden) closePromo();
+  });
+  window.setTimeout(() => { promoToast.hidden = false; }, 1800);
+}
+
