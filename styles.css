@@ -98,3 +98,5 @@
   .promo-toast-note{margin-top:6px}
 }
 @media(prefers-reduced-motion:reduce){.promo-toast{animation:none}}
+
+.gallery-toggle[hidden]{display:none!important}
