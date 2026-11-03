@@ -7,8 +7,8 @@
   <meta name="description" content="Buffet Sabor de Mel atende festas infantis e eventos corporativos com coffee break, confraternizações, convenções e buffet no local.">
   <title>Buffet Sabor de Mel | Festas e eventos corporativos</title>
   <link rel="icon" href="assets/abelhinha-sabor-de-mel-gerada.png" type="image/png">
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css?v=20261103-mobile-promo-fix">
-  <script src="script.js?v=20261103-close-fix2" defer></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css?v=20261103-no-promo">
+  <script src="script.js?v=20261103-no-promo" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -191,21 +191,6 @@
       <small>© <span id="current-year"></span> Buffet Sabor de Mel. Todos os direitos reservados.</small>
     </div>
   </footer>
-  <div class="promo-modal" id="promo-modal" hidden>
-    <div class="promo-backdrop" data-promo-close onclick="document.getElementById('promo-modal').hidden=true;document.body.classList.remove('promo-open')"></div>
-    <section class="promo-card" role="dialog" aria-modal="true" aria-labelledby="promo-title" aria-describedby="promo-description" tabindex="-1">
-      <button class="promo-close" type="button" aria-label="Fechar oferta" data-promo-close onclick="document.getElementById('promo-modal').hidden=true;document.body.classList.remove('promo-open')" ontouchend="event.preventDefault();document.getElementById('promo-modal').hidden=true;document.body.classList.remove('promo-open')">Fechar</button>
-      <figure class="promo-art"><img src="https://images.pexels.com/photos/6405756/pexels-photo-6405756.jpeg?auto=compress&amp;dpr=1&amp;h=750&amp;w=1260" alt="Grupo diverso de colegas brinda durante uma confraternização em ambiente fechado" title="Foto de Pavel Danilyuk no Pexels" loading="eager" decoding="async"></figure>
-      <div class="promo-content">
-        <p class="eyebrow">Benefício para empresas</p>
-        <p class="promo-discount"><span>10</span><span class="promo-percent">%</span><span class="promo-off">de desconto</span></p>
-        <h2 id="promo-title">Celebre com a sua equipe.</h2>
-        <p id="promo-description">Feche sua confraternização com antecedência e aproveite 10% de desconto.</p>
-        <a class="button button-yellow promo-cta" href="https://wa.me/5511965373634?text=Ol%C3%A1%2C%20quero%20saber%20sobre%20os%2010%25%20de%20desconto%20para%20confraterniza%C3%A7%C3%A3o%20corporativa" target="_blank" rel="noopener noreferrer">Consultar no WhatsApp <span aria-hidden="true">↗</span></a>
-        <small>Consulte condições e disponibilidade para a sua data.</small>
-      </div>
-    </section>
-  </div>
 </body>
 </html>
 

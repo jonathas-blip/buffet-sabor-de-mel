@@ -13,7 +13,6 @@
 
 
 
-.promo-modal[hidden]{display:none!important}.promo-modal{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:20px}.promo-backdrop{position:absolute;inset:0;background:#1d382bb0;backdrop-filter:blur(5px);animation:promo-fade .25s ease both}.promo-card{position:relative;z-index:1;display:grid;grid-template-columns:1fr;width:min(100%,560px);min-width:0;overflow:hidden;border:1px solid #e4d79d;border-radius:28px;background:#fbf6e5;color:#203f2b;box-shadow:0 24px 70px #10251b45;animation:promo-rise .32s cubic-bezier(.2,.8,.2,1) both}.promo-art{position:relative;min-width:0;height:190px;min-height:190px;margin:0;overflow:hidden;background:#dce7d0}.promo-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;filter:saturate(.78) brightness(1.03)}.promo-content{position:relative;display:flex;min-width:0;flex-direction:column;justify-content:center;align-items:center;padding:34px 42px 30px;text-align:center}.promo-close{position:absolute;z-index:3;top:12px;right:13px;display:grid;place-items:center;width:36px;height:36px;border:1px solid #d9d5af;border-radius:50%;background:#f8f0cded;color:#254b34;font:400 24px/1 var(--sans);cursor:pointer;transition:background .2s,border-color .2s}.promo-close:hover{background:#e7edda;border-color:#75916d}.promo-close:focus-visible{outline:3px solid var(--rose);outline-offset:3px}.promo-content .eyebrow{margin:4px 0 10px;color:#7b8857}.promo-discount{display:flex;align-items:baseline;gap:4px;margin:0;color:#254b34;font:800 76px/.9 var(--sans);letter-spacing:-.095em;white-space:nowrap}.promo-percent{color:#9b853e;font:700 32px/1 var(--sans);letter-spacing:-.04em}.promo-off{padding-left:5px;color:#8a7550;font:700 10px/1.2 var(--sans);letter-spacing:.13em;text-transform:uppercase}.promo-content h2{max-width:340px;margin:14px auto 8px;color:#203f2b;font:600 34px/1 var(--display);letter-spacing:-.025em}.promo-content>p:not(.eyebrow):not(.promo-discount){max-width:360px;margin:0 auto 18px;color:#596b59;font-size:13px;line-height:1.75}.promo-cta{width:min(100%,360px);max-width:100%;min-height:48px;padding:12px 13px;border-color:#b5c9a8;background:#d5e1c7;color:#244832;font-size:11px}.promo-cta:hover{border-color:#a5bd94;background:#c2d5b4}.promo-content>small{display:block;margin-top:11px;color:#71806d;font-size:9px;line-height:1.5}.promo-open{overflow:hidden}@keyframes promo-fade{from{opacity:0}to{opacity:1}}@keyframes promo-rise{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}@media(max-width:620px){.promo-modal{padding:16px}.promo-card{grid-template-columns:1fr;width:min(100%,420px);max-height:calc(100dvh - 32px);overflow:auto;border-radius:24px}.promo-art{min-height:0;height:155px}.promo-art img{object-position:center 56%}.promo-content{padding:24px 23px 23px}.promo-close{top:11px;right:11px;width:33px;height:33px;background:#fbf4e7eb}.promo-content .eyebrow{margin:0 0 7px;font-size:9px}.promo-discount{font-size:66px}.promo-percent{font-size:28px}.promo-off{font-size:9px}.promo-content h2{margin:12px 0 7px;font-size:29px}.promo-content>p:not(.eyebrow):not(.promo-discount){margin-bottom:14px;font-size:12px}.promo-cta{font-size:11px}.promo-content>small{margin-top:8px;font-size:9px}}@media(prefers-reduced-motion:reduce){.promo-backdrop,.promo-card{animation:none!important}}
 
 
 
@@ -58,24 +57,3 @@
 
 /* Mobile event card: stack image and copy without overlap. */
 @media (max-width: 700px) { .event-feature { display:flex; flex-direction:column; align-items:stretch; } .event-feature > img { display:block; flex:0 0 225px; width:100%; height:225px; min-height:225px; } .event-feature-copy { position:relative; z-index:1; flex:0 0 auto; margin:0; background:#fffaf0; } }
-
-/* Keep the promo close button above artwork and easy to tap on phones. */
-#promo-modal .promo-close{z-index:10;pointer-events:auto;touch-action:manipulation;-webkit-tap-highlight-color:transparent;width:44px;height:44px}
-@media(max-width:620px){#promo-modal .promo-close{width:44px;height:44px}}
-
-/* On phones, keep the offer compact and let the page remain usable around it. */
-@media(max-width:700px){
-  .promo-modal{inset:auto 12px 12px;display:block;padding:0;pointer-events:none;background:transparent}
-  .promo-backdrop{display:none}
-  .promo-card{width:min(100%,420px);max-height:min(48dvh,320px);margin:0 auto;overflow:auto;pointer-events:auto;border-radius:18px}
-  .promo-art{display:none}
-  .promo-content{padding:54px 18px 16px}
-  .promo-close{top:8px;right:8px;width:auto!important;height:40px!important;padding:0 16px;border-radius:999px;font-size:12px;font-weight:800}
-  .promo-content .eyebrow{margin:0 0 5px;font-size:9px}
-  .promo-discount{font-size:54px}
-  .promo-percent{font-size:25px}
-  .promo-content h2{margin:7px auto;font-size:25px}
-  .promo-content>p:not(.eyebrow):not(.promo-discount){margin-bottom:10px;font-size:12px}
-  .promo-cta{min-height:44px}
-  .promo-content>small{display:none}
-}
