@@ -65,7 +65,12 @@ if (promoModal) {
     document.body.classList.add('promo-open');
     promoCard.focus();
   };
-  promoModal.querySelectorAll('[data-promo-close]').forEach(button => button.addEventListener('click', closePromo));
+  promoModal.addEventListener('click', event => {
+    const target = event.target;
+    if (!(target instanceof Element) || !target.closest('[data-promo-close]')) return;
+    event.preventDefault();
+    closePromo();
+  }, true);
   promoModal.querySelector('.promo-cta').addEventListener('click', closePromo);
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape' && !promoModal.hidden) closePromo();

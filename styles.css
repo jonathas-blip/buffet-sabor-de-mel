@@ -58,3 +58,7 @@
 
 /* Mobile event card: stack image and copy without overlap. */
 @media (max-width: 700px) { .event-feature { display:flex; flex-direction:column; align-items:stretch; } .event-feature > img { display:block; flex:0 0 225px; width:100%; height:225px; min-height:225px; } .event-feature-copy { position:relative; z-index:1; flex:0 0 auto; margin:0; background:#fffaf0; } }
+
+/* Keep the promo close button above artwork and easy to tap on phones. */
+#promo-modal .promo-close{z-index:10;pointer-events:auto;touch-action:manipulation;-webkit-tap-highlight-color:transparent;width:44px;height:44px}
+@media(max-width:620px){#promo-modal .promo-close{width:44px;height:44px}}

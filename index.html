@@ -8,7 +8,7 @@
   <title>Buffet Sabor de Mel | Festas e eventos corporativos</title>
   <link rel="icon" href="assets/abelhinha-sabor-de-mel-gerada.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer></script>
+  <script src="script.js?v=20261103-close-fix" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -192,9 +192,9 @@
     </div>
   </footer>
   <div class="promo-modal" id="promo-modal" hidden>
-    <div class="promo-backdrop" data-promo-close></div>
+    <div class="promo-backdrop" data-promo-close onclick="document.getElementById('promo-modal').hidden=true;document.body.classList.remove('promo-open')"></div>
     <section class="promo-card" role="dialog" aria-modal="true" aria-labelledby="promo-title" aria-describedby="promo-description" tabindex="-1">
-      <button class="promo-close" type="button" aria-label="Fechar oferta" data-promo-close>×</button>
+      <button class="promo-close" type="button" aria-label="Fechar oferta" data-promo-close onclick="document.getElementById('promo-modal').hidden=true;document.body.classList.remove('promo-open')">×</button>
       <figure class="promo-art"><img src="https://images.pexels.com/photos/6405756/pexels-photo-6405756.jpeg?auto=compress&amp;dpr=1&amp;h=750&amp;w=1260" alt="Grupo diverso de colegas brinda durante uma confraternização em ambiente fechado" title="Foto de Pavel Danilyuk no Pexels" loading="eager" decoding="async"></figure>
       <div class="promo-content">
         <p class="eyebrow">Benefício para empresas</p>
