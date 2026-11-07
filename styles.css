@@ -111,3 +111,37 @@
   .promo-toast-cta{min-height:42px;padding-inline:14px}
   .promo-toast-note{margin-top:6px;font-size:8px}
 }
+
+/* ===== Ajustes 2026-11-07: regiões, WhatsApp fixo e pop-up compacto ===== */
+.area-section{background:#f5f0dc}
+.area-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.area-grid li{display:flex;flex-direction:column;gap:6px;padding:22px;border-radius:20px;background:#fffaf0;border:1px solid #dfd19e;border-top:4px solid #d7c46e}
+.area-grid strong{font:600 24px/1.1 var(--display);color:#2f4a35}
+.area-grid span{color:#687565;font-size:14px;line-height:1.5}
+@media(max-width:900px){.area-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.area-grid{grid-template-columns:1fr}}
+
+.wa-float{position:fixed;right:24px;bottom:24px;z-index:55;display:grid;place-items:center;width:60px;height:60px;border-radius:50%;background:#1faf55;color:#fff;box-shadow:0 10px 26px #00000033;transition:transform .15s ease}
+.wa-float:hover{transform:translateY(-2px)}
+.wa-float svg{width:32px;height:32px}
+.mobile-cta{display:none}
+/* com o pop-up aberto, o botão flutuante some para não ficar por baixo dele */
+body:has(.promo-toast:not([hidden])) .wa-float{display:none}
+
+@media(max-width:700px){
+  body{padding-bottom:76px}
+  .wa-float{display:none}
+  .mobile-cta{display:grid;grid-template-columns:1.4fr 1fr;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:58;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(255,250,240,.97);border-top:1px solid #dfd19e;backdrop-filter:blur(8px)}
+  .mobile-cta a{display:flex;align-items:center;justify-content:center;min-height:46px;border-radius:999px;font:800 13px/1.1 var(--sans);text-decoration:none;text-align:center}
+  .mobile-cta-wa{background:#1faf55;color:#fff}
+  .mobile-cta-corp{background:#eadcaa;color:#2f4a35}
+  /* pop-up compacto, acima da barra fixa */
+  .promo-toast{bottom:calc(76px + env(safe-area-inset-bottom))}
+  .promo-toast-card{padding:14px 16px 14px;border-radius:18px}
+  .promo-toast-close{top:10px;right:10px;min-width:auto;min-height:34px;padding:0 12px}
+  .promo-toast-eyebrow{margin:0 70px 2px 0}
+  .promo-toast-discount strong{font-size:30px}
+  .promo-toast-card h2{font-size:19px;margin:2px 0 8px}
+  .promo-toast-description,.promo-toast-note{display:none}
+  .promo-toast-cta{min-height:40px}
+}

@@ -15,12 +15,23 @@ if (menuButton && navigation) {
 }
 
 const galleryFiles = [
+  {file:'barracas-piscina.jpg',alt:'Barraquinhas do Buffet Sabor de Mel montadas ao lado da piscina'},
+  {file:'mini-lanches.jpg',alt:'Mini lanches, mini dogs, nuggets e batata frita servidos na festa'},
+  {file:'barraca-atendimento.jpg',alt:'Atendente preparando lanches na barraquinha'},
   {file:'bolo-chocolate.jpg',alt:'Bolo de chocolate decorado com morangos'},
+  {file:'carrinho-pipoca.jpg',alt:'Carrinho de pipoca para festa infantil'},
+  {file:'mini-hamburguer.jpg',alt:'Mini hambúrgueres servidos em bandeja'},
+  {file:'finger-food.jpg',alt:'Mesa de finger food e saladas para evento'},
+  {file:'maca-do-amor.jpg',alt:'Maçãs do amor'},
+  {file:'barracas-salao.jpg',alt:'Barraquinhas montadas em salão de festas'},
+  {file:'crepe-nutella.jpg',alt:'Crepe com Nutella e morangos'},
   {file:'grelhados.jpg',alt:'Espetinhos preparados na churrasqueira durante o evento'},
   {file:'caldos.jpg',alt:'Caldos servidos em panelas de barro'},
+  {file:'mini-pizza.jpg',alt:'Mini pizzas'},
+  {file:'algodao-doce.jpg',alt:'Algodão-doce rosa e azul'},
+  {file:'buffet-quente.jpg',alt:'Buffet quente servido em réchauds'},
   {file:'mesa-salada.jpg',alt:'Mesa de saladas e acompanhamentos frescos'},
-  {file:'salgados.jpg',alt:'Salgados assados organizados em uma bandeja'},
-  {file:'bolo-tema-futebol.jpg',alt:'Mesa de aniversário decorada com tema de futebol'}
+  {file:'salgados.jpg',alt:'Salgados assados organizados em uma bandeja'}
 ];
 const gallery = document.querySelector('#gallery-grid');
 if (gallery) {
@@ -50,9 +61,19 @@ if (galleryToggle && gallery) {
 const year = document.querySelector('#current-year');
 if (year) year.textContent = new Date().getFullYear();
 
+// Conversão "Clique no WhatsApp" do Google Ads (dispara uma vez por clique em qualquer link do WhatsApp)
+document.addEventListener('click', event => {
+  const link = event.target.closest('a[href*="wa.me/"], a[href*="api.whatsapp.com"]');
+  if (!link || typeof window.gtag !== 'function') return;
+  window.gtag('event', 'conversion', { send_to: 'AW-11481407800/P7-pCJLeqrAdELjC4eIq' });
+});
+
 const promoToast = document.querySelector('#promo-toast');
 if (promoToast) {
-  const closePromo = () => { promoToast.hidden = true; };
+  const promoKey = 'sdm-promo-vista';
+  const alreadySeen = () => { try { return sessionStorage.getItem(promoKey) === '1'; } catch (e) { return false; } };
+  const markSeen = () => { try { sessionStorage.setItem(promoKey, '1'); } catch (e) {} };
+  const closePromo = () => { promoToast.hidden = true; markSeen(); };
   promoToast.querySelector('[data-promo-close]').addEventListener('click', closePromo);
   promoToast.querySelector('.promo-toast-cta').addEventListener('click', closePromo);
   promoToast.addEventListener('pointerup', event => {
@@ -61,6 +82,20 @@ if (promoToast) {
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape' && !promoToast.hidden) closePromo();
   });
-  window.setTimeout(() => { promoToast.hidden = false; }, 1800);
+  // Só aparece depois de metade da página ou de 20 segundos, uma vez por visita
+  const showPromo = () => {
+    if (alreadySeen() || !promoToast.hidden) return;
+    promoToast.hidden = false;
+    markSeen();
+    window.removeEventListener('scroll', onScroll);
+  };
+  const onScroll = () => {
+    const scrolled = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight;
+    if (scrolled > 0.5) showPromo();
+  };
+  if (!alreadySeen()) {
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.setTimeout(showPromo, 20000);
+  }
 }
 

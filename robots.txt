@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://buffetsabordemel.com.br/sitemap.xml
