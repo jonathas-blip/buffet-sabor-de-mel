@@ -39,18 +39,14 @@ document.querySelectorAll('[data-tab]').forEach(link => link.addEventListener('c
 // ---------- Galeria ----------
 // Somente fotos reais de eventos do buffet (já recortadas e tratadas em assets/fotos)
 const galleryFiles = [
-  ['barraca-atendimento.jpg', 'Atendente preparando lanches na barraquinha do Buffet Sabor de Mel'],
-  ['mini-hamburguer.jpg', 'Mini hambúrgueres'],
-  ['maca-do-amor.jpg', 'Maçãs do amor'],
-  ['servico-buffet.jpg', 'Equipe servindo buffet em evento'],
-  ['crepe-nutella.jpg', 'Crepe com Nutella e morangos'],
-  ['mini-pizza.jpg', 'Mini pizzas'],
-  ['carrinho-pipoca.jpg', 'Carrinho de pipoca para festa'],
-  ['grelhados.jpg', 'Espetinhos na churrasqueira']
+  ['mini-hamburguer.jpg', 'Mini hambúrgueres', 'Mini hambúrguer'],
+  ['maca-do-amor.jpg', 'Maçãs do amor', 'Maçã do amor'],
+  ['mini-pizza.jpg', 'Mini pizzas', 'Mini pizza'],
+  ['grelhados.jpg', 'Espetinhos na churrasqueira', 'Espetinhos']
 ];
 const gallery = document.getElementById('gallery');
 if (gallery) {
-  galleryFiles.forEach(([file, alt]) => {
+  galleryFiles.forEach(([file, alt, caption]) => {
     const figure = document.createElement('figure');
     const image = document.createElement('img');
     image.src = `assets/fotos/${file}`;
@@ -59,7 +55,9 @@ if (gallery) {
     image.alt = alt;
     image.loading = 'lazy';
     image.decoding = 'async';
-    figure.append(image);
+    const label = document.createElement('figcaption');
+    label.textContent = caption;
+    figure.append(image, label);
     gallery.append(figure);
   });
 }
