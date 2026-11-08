@@ -1,101 +1,108 @@
+// ---------- Menu mobile ----------
 const menuButton = document.querySelector('.menu-toggle');
-const navigation = document.querySelector('.main-nav');
+const navigation = document.getElementById('site-nav');
 if (menuButton && navigation) {
-  menuButton.addEventListener('click', () => {
-    const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
-    menuButton.setAttribute('aria-expanded', String(!isOpen));
-    menuButton.setAttribute('aria-label', isOpen ? 'Abrir menu' : 'Fechar menu');
-    navigation.classList.toggle('open', !isOpen);
-  });
-  navigation.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
-    menuButton.setAttribute('aria-expanded', 'false');
-    menuButton.setAttribute('aria-label', 'Abrir menu');
-    navigation.classList.remove('open');
-  }));
+  const setMenu = open => {
+    menuButton.setAttribute('aria-expanded', String(open));
+    menuButton.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+    navigation.classList.toggle('open', open);
+  };
+  menuButton.addEventListener('click', () => setMenu(menuButton.getAttribute('aria-expanded') !== 'true'));
+  navigation.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenu(false)));
 }
 
+// ---------- Cardápio em abas ----------
+const tabs = [...document.querySelectorAll('.tabs [role="tab"]')];
+const selectTab = tab => {
+  tabs.forEach(t => {
+    const active = t === tab;
+    t.setAttribute('aria-selected', String(active));
+    t.tabIndex = active ? 0 : -1;
+    document.getElementById(t.getAttribute('aria-controls')).hidden = !active;
+  });
+};
+tabs.forEach((tab, i) => {
+  tab.addEventListener('click', () => selectTab(tab));
+  tab.addEventListener('keydown', e => {
+    if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+    const next = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+    selectTab(next);
+    next.focus();
+  });
+});
+// Links que abrem uma aba específica (ex.: "Ver barracas juninas")
+document.querySelectorAll('[data-tab]').forEach(link => link.addEventListener('click', () => {
+  const tab = document.getElementById('b-' + link.dataset.tab);
+  if (tab) selectTab(tab);
+}));
+
+// ---------- Galeria ----------
+// Somente fotos reais de eventos do buffet (já recortadas e tratadas em assets/fotos)
 const galleryFiles = [
-  {file:'barracas-piscina.jpg',alt:'Barraquinhas do Buffet Sabor de Mel montadas ao lado da piscina'},
-  {file:'mini-lanches.jpg',alt:'Mini lanches, mini dogs, nuggets e batata frita servidos na festa'},
-  {file:'barraca-atendimento.jpg',alt:'Atendente preparando lanches na barraquinha'},
-  {file:'bolo-chocolate.jpg',alt:'Bolo de chocolate decorado com morangos'},
-  {file:'carrinho-pipoca.jpg',alt:'Carrinho de pipoca para festa infantil'},
-  {file:'mini-hamburguer.jpg',alt:'Mini hambúrgueres servidos em bandeja'},
-  {file:'finger-food.jpg',alt:'Mesa de finger food e saladas para evento'},
-  {file:'maca-do-amor.jpg',alt:'Maçãs do amor'},
-  {file:'barracas-salao.jpg',alt:'Barraquinhas montadas em salão de festas'},
-  {file:'crepe-nutella.jpg',alt:'Crepe com Nutella e morangos'},
-  {file:'grelhados.jpg',alt:'Espetinhos preparados na churrasqueira durante o evento'},
-  {file:'caldos.jpg',alt:'Caldos servidos em panelas de barro'},
-  {file:'mini-pizza.jpg',alt:'Mini pizzas'},
-  {file:'algodao-doce.jpg',alt:'Algodão-doce rosa e azul'},
-  {file:'buffet-quente.jpg',alt:'Buffet quente servido em réchauds'},
-  {file:'mesa-salada.jpg',alt:'Mesa de saladas e acompanhamentos frescos'},
-  {file:'salgados.jpg',alt:'Salgados assados organizados em uma bandeja'}
+  ['barraca-atendimento.jpg', 'Atendente preparando lanches na barraquinha do Buffet Sabor de Mel'],
+  ['mini-hamburguer.jpg', 'Mini hambúrgueres'],
+  ['maca-do-amor.jpg', 'Maçãs do amor'],
+  ['servico-buffet.jpg', 'Equipe servindo buffet em evento'],
+  ['crepe-nutella.jpg', 'Crepe com Nutella e morangos'],
+  ['mini-pizza.jpg', 'Mini pizzas'],
+  ['carrinho-pipoca.jpg', 'Carrinho de pipoca para festa'],
+  ['grelhados.jpg', 'Espetinhos na churrasqueira']
 ];
-const gallery = document.querySelector('#gallery-grid');
+const gallery = document.getElementById('gallery');
 if (gallery) {
-  galleryFiles.forEach((photo, index) => {
+  galleryFiles.forEach(([file, alt]) => {
     const figure = document.createElement('figure');
-    figure.className = 'gallery-item';
-    if (index > 7) figure.hidden = true;
     const image = document.createElement('img');
-    image.src = `assets/gallery/retouched/${photo.file}`;
-    image.alt = photo.alt;
+    image.src = `assets/fotos/${file}`;
+    image.width = 800;
+    image.height = 800;
+    image.alt = alt;
     image.loading = 'lazy';
     image.decoding = 'async';
     figure.append(image);
     gallery.append(figure);
   });
 }
-const galleryToggle = document.querySelector('#gallery-toggle');
-if (galleryToggle && gallery) {
-  if (galleryFiles.length <= 8) galleryToggle.hidden = true;
-  galleryToggle.addEventListener('click', () => {
-    const showAll = galleryToggle.getAttribute('aria-expanded') !== 'true';
-    galleryToggle.setAttribute('aria-expanded', String(showAll));
-    galleryToggle.innerHTML = showAll ? 'Mostrar menos <span aria-hidden="true">−</span>' : 'Ver a galeria completa <span aria-hidden="true">＋</span>';
-    gallery.querySelectorAll('.gallery-item').forEach((item, index) => { item.hidden = !showAll && index > 7; });
-  });
-}
-const year = document.querySelector('#current-year');
+
+// ---------- Ano no rodapé ----------
+const year = document.getElementById('ano');
 if (year) year.textContent = new Date().getFullYear();
 
-// Conversão "Clique no WhatsApp" do Google Ads (dispara uma vez por clique em qualquer link do WhatsApp)
+// ---------- Conversão "Clique no WhatsApp" (Google Ads) ----------
 document.addEventListener('click', event => {
   const link = event.target.closest('a[href*="wa.me/"], a[href*="api.whatsapp.com"]');
   if (!link || typeof window.gtag !== 'function') return;
   window.gtag('event', 'conversion', { send_to: 'AW-11481407800/P7-pCJLeqrAdELjC4eIq' });
 });
 
-const promoToast = document.querySelector('#promo-toast');
-if (promoToast) {
-  const promoKey = 'sdm-promo-vista';
-  const alreadySeen = () => { try { return sessionStorage.getItem(promoKey) === '1'; } catch (e) { return false; } };
-  const markSeen = () => { try { sessionStorage.setItem(promoKey, '1'); } catch (e) {} };
-  const closePromo = () => { promoToast.hidden = true; markSeen(); };
-  promoToast.querySelector('[data-promo-close]').addEventListener('click', closePromo);
-  promoToast.querySelector('.promo-toast-cta').addEventListener('click', closePromo);
-  promoToast.addEventListener('pointerup', event => {
-    if (event.target.closest('[data-promo-close]')) closePromo();
-  }, true);
-  document.addEventListener('keydown', event => {
-    if (event.key === 'Escape' && !promoToast.hidden) closePromo();
-  });
-  // Só aparece depois de metade da página ou de 20 segundos, uma vez por visita
-  const showPromo = () => {
-    if (alreadySeen() || !promoToast.hidden) return;
-    promoToast.hidden = false;
-    markSeen();
-    window.removeEventListener('scroll', onScroll);
-  };
-  const onScroll = () => {
-    const scrolled = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight;
-    if (scrolled > 0.5) showPromo();
-  };
-  if (!alreadySeen()) {
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.setTimeout(showPromo, 20000);
-  }
-}
+// ---------- Pop-up de campanha ----------
+// Abre ao entrar no site, uma vez por visita, até a data em data-ate (AAAA-MM-DD).
+const promo = document.getElementById('promo');
+if (promo) {
+  const key = 'sdm-promo-vista';
+  const seen = () => { try { return sessionStorage.getItem(key) === '1'; } catch (e) { return false; } };
+  const markSeen = () => { try { sessionStorage.setItem(key, '1'); } catch (e) {} };
+  const until = promo.dataset.ate ? new Date(promo.dataset.ate + 'T23:59:59') : null;
+  const active = !until || new Date() <= until;
+  const native = typeof promo.showModal === 'function';
 
+  const close = () => {
+    if (native && promo.open) promo.close();
+    else { promo.removeAttribute('open'); promo.classList.remove('promo-fallback'); }
+    document.body.style.overflow = '';
+  };
+  const open = () => {
+    if (native) promo.showModal();
+    else { promo.setAttribute('open', ''); promo.classList.add('promo-fallback'); }
+    document.body.style.overflow = 'hidden';
+    markSeen();
+  };
+
+  promo.querySelectorAll('.promo-close, .promo-skip').forEach(b => b.addEventListener('click', close));
+  promo.querySelector('.promo-cta').addEventListener('click', () => setTimeout(close, 300));
+  promo.addEventListener('click', e => { if (e.target === promo) close(); });
+  promo.addEventListener('close', () => { document.body.style.overflow = ''; });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && promo.hasAttribute('open') && !native) close(); });
+
+  if (active && !seen()) setTimeout(open, 2500);
+}
